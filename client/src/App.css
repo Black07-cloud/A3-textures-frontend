@@ -1,0 +1,172 @@
+/* 🔥 APP ROOT */
+.app-container {
+  min-height: 100vh;
+}
+
+/* 🔥 GLASS EFFECT */
+.glass {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 🔥 PREMIUM CARD */
+.premium-card {
+  background: linear-gradient(
+    145deg,
+    rgba(30, 41, 59, 0.95),
+    rgba(15, 23, 42, 0.95)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.premium-card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(34, 197, 94, 0.6);
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(34, 197, 94, 0.15);
+}
+
+/* 🔥 HERO GLOW */
+.hero-glow {
+  position: relative;
+}
+
+.hero-glow::before {
+  content: "";
+
+  position: absolute;
+
+  top: -100px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 450px;
+  height: 450px;
+
+  background: radial-gradient(
+    circle,
+    rgba(34, 197, 94, 0.18),
+    transparent 70%
+  );
+
+  filter: blur(40px);
+
+  z-index: -1;
+}
+
+/* 🔥 BUTTON */
+.primary-btn {
+  background: linear-gradient(
+    135deg,
+    #22c55e,
+    #16a34a
+  );
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(34, 197, 94, 0.3);
+}
+
+.primary-btn:active {
+  transform: scale(0.98);
+}
+
+/* 🔥 NAVBAR */
+.navbar-blur {
+  background: rgba(2, 6, 23, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* 🔥 CATEGORY IMAGE */
+.category-image {
+  transition:
+    transform 0.7s ease,
+    filter 0.4s ease;
+}
+
+.category-image:hover {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+
+/* 🔥 REVIEW CARD */
+.review-card {
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(34, 197, 94, 0.5);
+
+  background:
+    rgba(30, 41, 59, 0.95);
+}
+
+/* 🔥 STAR EFFECT */
+.star-btn {
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease,
+    text-shadow 0.2s ease;
+}
+
+.star-btn:hover {
+  transform: scale(1.25) rotate(12deg);
+
+  text-shadow:
+    0 0 10px rgba(250, 204, 21, 0.8);
+}
+
+/* 🔥 SMOOTH FADE */
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+/* 🔥 MOBILE */
+@media (max-width: 768px) {
+
+  .hero-glow::before {
+    width: 280px;
+    height: 280px;
+  }
+
+}
