@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 
 import Home from "./pages/Home";
 
@@ -25,6 +26,13 @@ import AllCollections from "./pages/AllCollections";
 import AddReview from "./pages/AddReview";
 
 function App() {
+
+useEffect(() => {
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    window.deferredPrompt = e;
+  });
+}, []);
 
   return (
 
