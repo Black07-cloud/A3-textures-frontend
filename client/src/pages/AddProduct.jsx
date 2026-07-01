@@ -139,40 +139,66 @@ function AddProduct() {
             />
           </div>
 
-          <div>
-            <label className="block mb-3 text-slate-300 font-medium">
-              Product Image
-            </label>
+          {/* IMAGE UPLOAD */}
+<div className="mb-8">
 
-            <input
-              type="file"
-              accept="image/*"
-              capture="environment"
-              onChange={handleImageChange}
-              required
-              className="hidden"
-              id="productImage"
-            />
+  <label className="block mb-3 text-slate-300 font-medium">
+    Product Image
+  </label>
 
-            <label
-              htmlFor="productImage"
-              className="flex cursor-pointer items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-700 bg-slate-800 px-5 py-8 text-center hover:border-green-500 transition"
-            >
-              <span className="text-3xl" aria-hidden="true">
-                Camera
-              </span>
+  <div className="grid grid-cols-2 gap-4">
 
-              <span>
-                <span className="block font-semibold text-white">
-                  Camera / Gallery
-                </span>
+    {/* Camera */}
+    <div>
+      <input
+        id="cameraInput"
+        type="file"
+        accept="image/*"
+        capture="environment"
+        onChange={handleImageChange}
+        className="hidden"
+      />
 
-                <span className="block text-sm text-slate-400 mt-1">
-                  Tap to capture or choose an image
-                </span>
-              </span>
-            </label>
-          </div>
+      <label
+        htmlFor="cameraInput"
+        className="flex cursor-pointer items-center justify-center rounded-2xl bg-green-500 hover:bg-green-600 py-4 font-bold text-white transition"
+      >
+        📷 Camera
+      </label>
+    </div>
+
+    {/* Gallery */}
+    <div>
+      <input
+        id="galleryInput"
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+        className="hidden"
+      />
+
+      <label
+        htmlFor="galleryInput"
+        className="flex cursor-pointer items-center justify-center rounded-2xl bg-blue-500 hover:bg-blue-600 py-4 font-bold text-white transition"
+      >
+        🖼 Gallery
+      </label>
+    </div>
+
+  </div>
+
+</div>
+
+{/* Preview */}
+{preview && (
+  <div className="mt-6 overflow-hidden rounded-3xl border border-slate-700">
+    <img
+      src={preview}
+      alt="Preview"
+      className="w-full h-[300px] object-cover"
+    />
+  </div>
+)}
 
           {preview && (
             <div className="overflow-hidden rounded-3xl border border-slate-700">
