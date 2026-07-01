@@ -10,6 +10,7 @@ import AdminProfile from "../components/AdminProfile";
 import InstallModal from "../components/InstallModal";
 import InstallGuide from "../components/InstallGuide";
 import usePWAInstall from "../hooks/usePWAInstall";
+import Footer from "../components/Footer";
 
 function CategoryCard({ title, image, onClick }) {
   return (
@@ -86,18 +87,17 @@ function Home() {
     try {
       const response = await api.post("/reviews", newReview);
 
-      // UPDATE UI
       setReviews((prev) => [response.data, ...prev]);
-
-      // CLOSE FORM
       setShowReviewForm(false);
       setSelectedRating(0);
+
+      return response.data;
     } catch (err) {
-      console.log(err);
-      alert(err.response?.data?.error || "Failed to add review");
+      console.error("Review submit failed:", err);
+      throw err;
     }
   };
-
+      
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       {/* NAVBAR */}
@@ -201,7 +201,14 @@ function Home() {
           {/* REVIEW FORM */}
           {showReviewForm && (
             <div className="mb-14">
-              <ReviewForm addReview={addReview} selectedRating={selectedRating} />
+              <ReviewForm
+                addReview={addReview}
+                selectedRating={selectedRating}
+                onCancel={() => {
+                  setShowReviewForm(false);
+                  setSelectedRating(0);
+                }}
+              />
             </div>
           )}
 
@@ -246,6 +253,11 @@ function Home() {
   open={showGuide}
   onClose={() => setShowGuide(false)}
 />
+
+<footer className="mt-16">
+  <Footer />
+</footer>
+
     </div>
   );
 }

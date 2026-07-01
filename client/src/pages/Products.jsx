@@ -235,7 +235,7 @@ const navigate = useNavigate();
                 {!isAdmin && (
 
                  <a
-  href={`https://wa.me/918838370977?text=${encodeURIComponent(
+  href={`https://wa.me/919994886016?text=${encodeURIComponent(
 
 `✨ A³ Texture Enquiry
 
