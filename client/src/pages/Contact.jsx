@@ -17,7 +17,7 @@ export default function Contact() {
 
             <div className="space-y-5 mt-6">
 
-              <p>📞 +91 XXXXX XXXXX</p>
+              <p>📞 +91 9994886016</p>
 
               <p>📧 support@a3textures.com</p>
 
