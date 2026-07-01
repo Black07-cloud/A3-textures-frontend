@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import api from "../services/api";
 
 function AddProduct() {
@@ -7,32 +6,35 @@ function AddProduct() {
     name: "",
     category: "",
     sqftRate: "",
-    image: null
+    image: null,
   });
 
   const [preview, setPreview] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // INPUT CHANGE
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
+  // IMAGE CHANGE
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
 
     if (!file) return;
 
-    setForm({
-      ...form,
-      image: file
-    });
+    setForm((prev) => ({
+      ...prev,
+      image: file,
+    }));
 
     setPreview(URL.createObjectURL(file));
   };
 
+  // SUBMIT
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -48,23 +50,26 @@ function AddProduct() {
 
       await api.post("/textures", formData, {
         headers: {
-          "Content-Type": "multipart/form-data"
-        }
+          "Content-Type": "multipart/form-data",
+        },
       });
 
-      alert("Product added successfully");
+      alert("✅ Product added successfully");
 
       setForm({
         name: "",
         category: "",
         sqftRate: "",
-        image: null
+        image: null,
       });
 
       setPreview("");
       e.target.reset();
     } catch (err) {
-      alert(err.response?.data?.error || "Failed to add product");
+      alert(
+        err.response?.data?.error ||
+          "Failed to add product"
+      );
     } finally {
       setLoading(false);
     }
@@ -73,9 +78,11 @@ function AddProduct() {
   return (
     <div className="min-h-screen bg-slate-950 text-white p-6 md:p-10">
       <div className="max-w-3xl mx-auto">
+
+        {/* HEADER */}
         <div className="mb-10">
           <h1 className="text-4xl md:text-5xl font-extrabold">
-            Add Product
+            ➕ Add Product
           </h1>
 
           <p className="text-slate-400 mt-3 text-lg">
@@ -83,10 +90,13 @@ function AddProduct() {
           </p>
         </div>
 
+        {/* FORM */}
         <form
           onSubmit={handleSubmit}
           className="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl"
         >
+
+          {/* PRODUCT NAME */}
           <div>
             <label className="block mb-3 text-slate-300 font-medium">
               Product Name
@@ -95,17 +105,18 @@ function AddProduct() {
             <input
               type="text"
               name="name"
-              placeholder="Enter Product Name"
               value={form.name}
               onChange={handleChange}
+              placeholder="Enter Product Name"
               required
               className="w-full bg-slate-800 border border-slate-700 rounded-2xl px-5 py-4 outline-none focus:border-green-500"
             />
           </div>
 
+          {/* CATEGORY */}
           <div>
             <label className="block mb-3 text-slate-300 font-medium">
-              Select Category
+              Category
             </label>
 
             <select
@@ -118,11 +129,14 @@ function AddProduct() {
               <option value="">Select Category</option>
               <option value="Royal Play">Royal Play</option>
               <option value="Wood Grains">Wood Grains</option>
-              <option value="Silk Plast Wallpaper">Silk Plast Wallpaper</option>
+              <option value="Silk Plast Wallpaper">
+                Silk Plast Wallpaper
+              </option>
               <option value="Exterior">Exterior</option>
             </select>
           </div>
 
+          {/* SQFT RATE */}
           <div>
             <label className="block mb-3 text-slate-300 font-medium">
               Sq Ft Rate
@@ -131,93 +145,88 @@ function AddProduct() {
             <input
               type="number"
               name="sqftRate"
-              placeholder="Enter Rate"
               value={form.sqftRate}
               onChange={handleChange}
+              placeholder="Enter Rate"
               required
               className="w-full bg-slate-800 border border-slate-700 rounded-2xl px-5 py-4 outline-none focus:border-green-500"
             />
           </div>
 
-          {/* IMAGE UPLOAD */}
-<div className="mb-8">
+          {/* IMAGE */}
+          <div>
 
-  <label className="block mb-3 text-slate-300 font-medium">
-    Product Image
-  </label>
+            <label className="block mb-3 text-slate-300 font-medium">
+              Product Image
+            </label>
 
-  <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4">
 
-    {/* Camera */}
-    <div>
-      <input
-        id="cameraInput"
-        type="file"
-        accept="image/*"
-        capture="environment"
-        onChange={handleImageChange}
-        className="hidden"
-      />
+              {/* CAMERA */}
+              <div>
+                <input
+                  id="cameraInput"
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
 
-      <label
-        htmlFor="cameraInput"
-        className="flex cursor-pointer items-center justify-center rounded-2xl bg-green-500 hover:bg-green-600 py-4 font-bold text-white transition"
-      >
-        📷 Camera
-      </label>
-    </div>
+                <label
+                  htmlFor="cameraInput"
+                  className="flex cursor-pointer items-center justify-center rounded-2xl bg-green-500 hover:bg-green-600 py-4 font-bold text-white transition"
+                >
+                  📷 Camera
+                </label>
+              </div>
 
-    {/* Gallery */}
-    <div>
-      <input
-        id="galleryInput"
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-        className="hidden"
-      />
+              {/* GALLERY */}
+              <div>
+                <input
+                  id="galleryInput"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
 
-      <label
-        htmlFor="galleryInput"
-        className="flex cursor-pointer items-center justify-center rounded-2xl bg-blue-500 hover:bg-blue-600 py-4 font-bold text-white transition"
-      >
-        🖼 Gallery
-      </label>
-    </div>
+                <label
+                  htmlFor="galleryInput"
+                  className="flex cursor-pointer items-center justify-center rounded-2xl bg-blue-500 hover:bg-blue-600 py-4 font-bold text-white transition"
+                >
+                  🖼 Gallery
+                </label>
+              </div>
 
-  </div>
+            </div>
 
-</div>
+          </div>
 
-{/* Preview */}
-{preview && (
-  <div className="mt-6 overflow-hidden rounded-3xl border border-slate-700">
-    <img
-      src={preview}
-      alt="Preview"
-      className="w-full h-[300px] object-cover"
-    />
-  </div>
-)}
-
+          {/* PREVIEW (ONLY ONE) */}
           {preview && (
             <div className="overflow-hidden rounded-3xl border border-slate-700">
               <img
                 src={preview}
-                alt="Selected product preview"
+                alt="Preview"
                 className="w-full h-[300px] object-cover"
               />
             </div>
           )}
 
+          {/* BUTTON */}
           <button
             type="submit"
             disabled={loading}
             className="w-full bg-green-500 hover:bg-green-600 transition py-4 rounded-2xl text-lg font-bold shadow-lg disabled:opacity-50"
           >
-            {loading ? "Adding Product..." : "Add Product"}
+            {loading
+              ? "Adding Product..."
+              : "🚀 Add Product"}
           </button>
+
         </form>
+
       </div>
     </div>
   );
